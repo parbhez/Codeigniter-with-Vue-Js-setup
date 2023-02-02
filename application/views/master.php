@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codeigniter with Vue JS </title>
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <!-- Style -->
@@ -17,6 +18,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" ></script>
 <script src="https://unpkg.com/vue@next"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="<?php echo base_url(); ?>components/main.js"></script>
 </head>
 <body>
@@ -29,6 +31,7 @@
             </div>
 
             <ul class="list-unstyled components">
+            
                 <p>Dummy Heading</p>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
@@ -42,10 +45,10 @@
                     <a href="<?php echo base_url('about');?>">About</a>
                 </li>
                 <li>
-                    <a href="#">Portfolio</a>
+                    <a href="<?php echo base_url('manage-post'); ?>">Manage Post</a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url('/contact'); ?>">Contact</a>
+                    <a href="<?php echo base_url('contact'); ?>">Contact</a>
                 </li>
             </ul>
         </nav>
@@ -84,6 +87,7 @@
             </nav>
 
            <div>
+           <input id="base_url" type="hidden" value="<?php echo base_url(); ?>" />
            <?php echo $maincontent;?>
            </div>
 

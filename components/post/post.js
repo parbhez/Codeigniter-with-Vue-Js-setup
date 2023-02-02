@@ -1,42 +1,72 @@
-app.component('data-component', {
+app.component('post-component', {
+
     template:
     /*HTML*/
-        ` <form>
-    <div class="form-group">
-        <label for="exampleFormControlInput1">Email address</label>
-        <input type="email" class="form-control" v-model="email" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlSelect1">Example select</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-  </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlSelect2">Example multiple select</label>
-        <select multiple class="form-control" id="exampleFormControlSelect2">
-    <option>1</option>
-    <option>2</option>
-    <option>3</option>
-    <option>4</option>
-    <option>5</option>
-  </select>
-    </div>
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-</form>`,
+        `
+         <p>{{ heading }} {{ base_url }}{{ msg}} </p>
+         
+         <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Body</th>
+                <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(row, key) in posts" :key="key" v-if="posts.length">
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.title }}</td>
+                    <td>{{ row.body }}</td>
+                    <td>
+                    <a href="base_url + row.id" class="btn btn-success btn-sm">Edit</a>
+                    </td>
+                </tr>
+               
+                
+            </tbody>
+            </table>
+    `,
+
+    props: {
+        msg: {
+            type: String
+        }
+    },
 
     data() {
         return {
-            message: 'Student Form',
-            email: '',
+            heading: 'Manage Post',
+            posts: [],
         }
     },
+
+    mounted() {
+        this.get_all_posts();
+        document
+    },
+
+    computed: {
+        base_url() {
+            return $("#base_url").val();
+        }
+    },
+    methods: {
+        async get_all_posts() {
+            await axios.get('https://jsonplaceholder.typicode.com/posts')
+                .then((response) => {
+                    if (response.data) {
+                        this.posts = response.data;
+                    } else {
+                        console.log('Data not found')
+                    }
+                    // console.log(this.posts);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
+    }
 
 });

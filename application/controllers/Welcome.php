@@ -24,4 +24,12 @@ class Welcome extends CI_Controller {
 		$this->load->view('master', $data); 
 	}
 
+	public function manage_post()
+	{
+		$data = array();
+		$data['maincontent'] = $this->load->view('admin/pages/post/post', '', true);
+		$this->load->view('master', $data);
+
+	}
+
 }
