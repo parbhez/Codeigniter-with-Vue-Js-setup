@@ -20,7 +20,7 @@ app.component('post-component', {
                     <td>{{ row.title }}</td>
                     <td>{{ row.body }}</td>
                     <td>
-                    <a href="base_url + row.id" class="btn btn-success btn-sm">Edit</a>
+                    <a :href="base_url + '/' + row.id" class="btn btn-success btn-sm">Edit</a>
                     </td>
                 </tr>
                
@@ -44,7 +44,6 @@ app.component('post-component', {
 
     mounted() {
         this.get_all_posts();
-        document
     },
 
     computed: {
